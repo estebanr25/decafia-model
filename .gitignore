@@ -3,10 +3,8 @@
 *.pt
 *.pth
 
-# Imágenes del dataset
-*.jpg
-*.jpeg
-*.png
+# Dataset (imágenes sueltas en raíz o dataset/)
+dataset/images/
 *.zip
 
 # Python basura

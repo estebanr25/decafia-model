@@ -28,5 +28,5 @@ institucionales (Universidad Industrial de Santander - UIS).
 
 Para solicitar acceso con fines de investigación escribe a:
 
-esteban.rosas@correo.uis.edu.co
+rosas.esteban.10gmail.com
 

@@ -39,7 +39,7 @@ MODEL_PATH      = MODELS_PATH / "decafia_int8.onnx"
 TREATMENTS_PATH = BASE_DIR / "treatments.json"
 
 # ── Config ────────────────────────────────────────────────────────────────────
-CONF_THRESHOLD         = 0.50
+CONF_THRESHOLD         = 0.25
 IOU_THRESHOLD          = 0.45
 INPUT_SIZE             = 640
 CLASS_NAMES            = {0: "roya", 1: "coco", 2: "sano", 3: "minador"}
@@ -334,8 +334,7 @@ HELP_MESSAGE = (
     "💊 *TRATAMIENTO MINADOR* — Guía para tratar el minador\n"
     "📋 *HISTORIAL* — Tus últimos 5 escaneos\n"
     "❓ *AYUDA* — Ver este mensaje\n\n"
-    "_DECAFIA — Universidad Industrial de Santander_\n"
-    "_Proyecto de grado Ingeniería Electrónica_"
+    "_🌿 DECAFIA — Detección Inteligente de Enfermedades del Café._"
 )
 
 NOT_A_LEAF_MESSAGE = (

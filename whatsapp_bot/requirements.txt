@@ -1,0 +1,7 @@
+flask
+twilio
+onnxruntime
+numpy
+Pillow
+requests
+gunicorn

@@ -1,0 +1,63 @@
+{
+  "roya": {
+    "nombre": "Roya del cafeto",
+    "nombre_cientifico": "Hemileia vastatrix",
+    "descripcion": "Hongo que produce manchas amarillas o anaranjadas en el envés de las hojas. Es la enfermedad más devastadora del café a nivel mundial.",
+    "sintomas": "Manchas polvorosas de color naranja-amarillo en el revés de la hoja. Las hojas afectadas caen prematuramente.",
+    "fungicida": "Fungicida cúprico (hidróxido de cobre o caldo bordelés)",
+    "dosis": "3 g/litro de agua",
+    "frecuencia": "Cada 15 días durante el período lluvioso. Mínimo 3 aplicaciones.",
+    "modo_aplicacion": "Aspersión al envés de las hojas hasta punto de goteo.",
+    "medidas_culturales": [
+      "Recoger y destruir hojas caídas con síntomas",
+      "Podar para mejorar la ventilación del cafetal",
+      "Mantener sombra adecuada (30-40%)",
+      "Evitar exceso de fertilización nitrogenada"
+    ],
+    "costo_estimado_cop": "15.000 - 25.000 por litro de fungicida cúprico",
+    "fuente": "Cenicafé — Boletín Técnico No. 35",
+    "urgencia": "ALTA — tratar en las próximas 48 horas",
+    "emoji": "🔴"
+  },
+  "coco": {
+    "nombre": "Coco — Picudo del Café (Vaquita)",
+    "nombre_cientifico": "Compsus sp. / Epicaerus sp. (Curculionidae)",
+    "descripcion": "El 'Coco' o 'Vaquita' es un picudo de la familia Curculionidae (géneros Compsus sp. o Epicaerus sp.). Los adultos son insectos masticadores que se alimentan del follaje del cafeto realizando perforaciones irregulares en el limbo foliar. Se alimentan de noche; durante el día permanecen inmóviles o se dejan caer al suelo si se perturba la planta. Fuente: Manual del Cafetero Colombiano, Cenicafé (2013).",
+    "sintomas": "Perforaciones irregulares que atraviesan toda la lámina foliar, con bordes necróticos cafés. Los cortes son de tamaño variable y se ubican en cualquier parte de la hoja. En ataques severos puede causar defoliación parcial de la planta.",
+    "fungicida": "Clorpirifos 480 EC o Deltametrina 25 EC",
+    "dosis": "1.5 mL/litro de agua (Clorpirifos) o 0.5 mL/litro de agua (Deltametrina)",
+    "frecuencia": "Repetir a los 15 días si la infestación persiste. Tratar cuando más del 10% de hojas presenten daño visible.",
+    "modo_aplicacion": "Aspersión al follaje (haz y envés) en horas de menor temperatura: 6–9 a.m. o 4–6 p.m.",
+    "medidas_culturales": [
+      "Recolectar adultos manualmente sacudiendo las ramas sobre una bolsa plástica en horas de la mañana",
+      "Mantener regulación de sombra adecuada para reducir estrés hídrico de la planta",
+      "Eliminar hospederos alternos (malezas) alrededor del lote",
+      "Aplicar control químico solo cuando se supere el umbral del 10% de hojas con daño"
+    ],
+    "costo_estimado_cop": "25.000 - 40.000 por litro de insecticida",
+    "fuente": "Manual del Cafetero Colombiano, Cenicafé (2013), Vol. 2, pp. 261-306. DOI: 10.38141/cenbook-0026_25",
+    "urgencia": "MEDIA — tratar dentro de los próximos 5 días",
+    "emoji": "🟡"
+  },
+  "minador": {
+    "nombre": "Minador de la hoja",
+    "nombre_cientifico": "Leucoptera coffeella",
+    "descripcion": "Mariposa nocturna cuyas larvas perforan la hoja y trazan galerías (minas) que destruyen el tejido foliar. Puede causar defoliación severa.",
+    "sintomas": "Galerías transparentes o manchas necróticas irregulares dentro de la hoja. Las larvas se ven como puntos oscuros dentro de las minas.",
+    "fungicida": "Insecticida: Clorpirifos 480 EC o Deltametrina 25 EC",
+    "dosis": "1.5 mL/litro de agua (Clorpirifos) o 0.5 mL/litro (Deltametrina)",
+    "frecuencia": "Cada 15 días en épocas de alta población (inicio de lluvias). 2-3 aplicaciones.",
+    "modo_aplicacion": "Aspersión al haz y envés de las hojas. Aplicar en horas de la tarde cuando los adultos son más activos.",
+    "medidas_culturales": [
+      "Retirar y destruir manualmente las hojas con galerías visibles",
+      "Recoger hojas caídas del suelo para reducir pupas",
+      "Podar para eliminar ramas con alta infestación",
+      "Conservar parasitoides naturales: Mirax insularis y Stiropius caribbeanus",
+      "Evitar aplicaciones innecesarias de insecticidas que eliminen enemigos naturales"
+    ],
+    "costo_estimado_cop": "12.000 - 22.000 por litro de insecticida",
+    "fuente": "Cenicafé — Avance Técnico No. 392",
+    "urgencia": "MEDIA — tratar dentro de los próximos 5 días",
+    "emoji": "🟠"
+  }
+}

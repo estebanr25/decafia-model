@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: decafia-bot
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: TWILIO_ACCOUNT_SID
+        value: AC45372971fa08937185d6348f885e6317
+      - key: TWILIO_AUTH_TOKEN
+        value: 657742494c88995c47b75bf550f3af3f
+      - key: TWILIO_WHATSAPP_NUMBER
+        value: "whatsapp:+15559505869"

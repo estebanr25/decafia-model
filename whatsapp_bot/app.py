@@ -378,9 +378,10 @@ def download_image(media_url: str, auth_token: str) -> Optional[Image.Image]:
 def _twiml(text: str):
     """Return a properly formatted TwiML response with Content-Type text/xml."""
     resp = MessagingResponse()
-    msg = resp.message()
-    msg.body(text)
-    return str(resp), 200, {"Content-Type": "text/xml"}
+    resp.message(text)
+    twiml_str = str(resp)
+    print(f"TwiML being sent: {twiml_str[:200]}", flush=True)
+    return twiml_str, 200, {"Content-Type": "text/xml"}
 
 
 @app.route("/webhook", methods=["POST"])

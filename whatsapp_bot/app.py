@@ -41,7 +41,7 @@ MODEL_PATH      = MODELS_PATH / "decafia_int8.onnx"
 TREATMENTS_PATH = BASE_DIR / "treatments.json"
 
 # ── Config ────────────────────────────────────────────────────────────────────
-CONF_THRESHOLD         = 0.25
+CONF_THRESHOLD         = 0.15
 IOU_THRESHOLD          = 0.45
 INPUT_SIZE             = 640
 CLASS_NAMES            = {0: "roya", 1: "coco", 2: "sano", 3: "minador"}
@@ -421,6 +421,10 @@ def webhook():
         except Exception as e:
             log.error("Inference error: %s", e)
             return _twiml("⚠️ Error al analizar la imagen. Intenta de nuevo.")
+
+        max_conf = max((d["confidence"] for d in detections), default=0.0)
+        print(f"Raw detections: {detections}", flush=True)
+        print(f"Max confidence seen: {max_conf}", flush=True)
 
         # Save to history
         if detections:

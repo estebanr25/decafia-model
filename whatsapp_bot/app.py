@@ -374,8 +374,20 @@ def download_image(media_url: str, auth_token: str) -> Optional[Image.Image]:
 
 # ── Webhook ───────────────────────────────────────────────────────────────────
 
+def _twiml(text: str):
+    """Return a properly formatted TwiML response with Content-Type text/xml."""
+    resp = MessagingResponse()
+    resp.message(text)
+    return str(resp), 200, {"Content-Type": "text/xml"}
+
+
 @app.route("/webhook", methods=["POST"])
 def webhook():
+    print("WEBHOOK CALLED", flush=True)
+    print(f"Body: {request.form.get('Body', '')}", flush=True)
+    print(f"NumMedia: {request.form.get('NumMedia', '0')}", flush=True)
+    print(f"From: {request.form.get('From', '')}", flush=True)
+
     auth_token = os.environ.get("TWILIO_AUTH_TOKEN", "")
 
     # Validate Twilio signature
@@ -388,11 +400,11 @@ def webhook():
             log.warning("Invalid Twilio signature — rejected request (url=%s)", url)
             return "Forbidden", 403
 
-    resp   = MessagingResponse()
-    msg    = resp.message()
-    sender = request.form.get("From", "unknown")
-    body   = (request.form.get("Body") or "").strip().upper()
+    sender  = request.form.get("From", "unknown")
+    body    = (request.form.get("Body") or "").strip().upper()
     n_media = int(request.form.get("NumMedia", 0))
+
+    print(f"Parsed — sender={sender}  body={body!r}  n_media={n_media}", flush=True)
 
     # ── Photo received ────────────────────────────────────────────────────────
     if n_media > 0:
@@ -400,15 +412,13 @@ def webhook():
         image = download_image(media_url, auth_token)
 
         if image is None:
-            msg.body(NOT_A_LEAF_MESSAGE)
-            return str(resp)
+            return _twiml(NOT_A_LEAF_MESSAGE)
 
         try:
             detections = run_inference(image)
         except Exception as e:
             log.error("Inference error: %s", e)
-            msg.body("⚠️ Error al analizar la imagen. Intenta de nuevo.")
-            return str(resp)
+            return _twiml("⚠️ Error al analizar la imagen. Intenta de nuevo.")
 
         # Save to history
         if detections:
@@ -417,45 +427,43 @@ def webhook():
                 "timestamp":  datetime.now(),
                 "disease":    top["class_name"],
                 "confidence": top["confidence"],
-                "area_pct":   top["area_pct"],
+                "lesions":    top["lesion_count"],
             })
         else:
             _history[sender].append({
                 "timestamp":  datetime.now(),
                 "disease":    "sano",
                 "confidence": 1.0,
-                "area_pct":   0.0,
+                "lesions":    0,
             })
 
-        # Cap history length
         if len(_history[sender]) > HISTORY_LIMIT * 2:
             _history[sender] = _history[sender][-HISTORY_LIMIT:]
 
         if not detections:
-            msg.body(LOW_CONFIDENCE_MESSAGE)
-        else:
-            msg.body(build_diagnosis_message(detections))
-        return str(resp)
+            return _twiml(LOW_CONFIDENCE_MESSAGE)
+        return _twiml(build_diagnosis_message(detections))
 
     # ── Text commands ─────────────────────────────────────────────────────────
     if re.match(r"TRATAMIENTO\s+ROYA", body):
-        msg.body(build_treatment_message("roya"))
+        reply = build_treatment_message("roya")
     elif re.match(r"TRATAMIENTO\s+COCO", body):
-        msg.body(build_treatment_message("coco"))
+        reply = build_treatment_message("coco")
     elif re.match(r"TRATAMIENTO\s+MINADOR", body):
-        msg.body(build_treatment_message("minador"))
+        reply = build_treatment_message("minador")
     elif body == "HISTORIAL":
-        msg.body(build_history_message(sender))
+        reply = build_history_message(sender)
     elif body in ("AYUDA", "HELP", "HOLA", "INICIO", "START"):
-        msg.body(HELP_MESSAGE)
+        reply = HELP_MESSAGE
     else:
-        msg.body(
+        reply = (
             "No entendí tu mensaje.\n"
             "Responde *AYUDA* para ver los comandos disponibles,\n"
             "o envía una foto de una hoja de café para analizarla."
         )
 
-    return str(resp)
+    print(f"Replying with {len(reply)} chars", flush=True)
+    return _twiml(reply)
 
 
 @app.route("/health", methods=["GET"])

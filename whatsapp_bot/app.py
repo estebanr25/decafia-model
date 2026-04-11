@@ -378,7 +378,8 @@ def download_image(media_url: str, auth_token: str) -> Optional[Image.Image]:
 def _twiml(text: str):
     """Return a properly formatted TwiML response with Content-Type text/xml."""
     resp = MessagingResponse()
-    resp.message(text)
+    msg = resp.message()
+    msg.body(text)
     return str(resp), 200, {"Content-Type": "text/xml"}
 
 

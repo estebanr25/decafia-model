@@ -28,6 +28,7 @@ from typing import Optional
 import numpy as np
 import requests
 from flask import Flask, jsonify, request
+from werkzeug.middleware.proxy_fix import ProxyFix
 from PIL import Image
 from twilio.request_validator import RequestValidator
 from twilio.twiml.messaging_response import MessagingResponse
@@ -89,6 +90,9 @@ LOW_CONFIDENCE_MESSAGE = (
 
 # ── Flask app ─────────────────────────────────────────────────────────────────
 app = Flask(__name__)
+# Trust Render's reverse-proxy headers so request.url returns the public HTTPS URL.
+# Without this, Twilio signature validation fails (http:// vs https:// mismatch).
+app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1)
 print(f"FROM number: {os.environ.get('TWILIO_WHATSAPP_NUMBER', 'NOT SET')}")
 
 
@@ -379,8 +383,9 @@ def webhook():
         validator = RequestValidator(auth_token)
         signature = request.headers.get("X-Twilio-Signature", "")
         url       = request.url
+        log.info("Validating signature for URL: %s", url)
         if not validator.validate(url, request.form, signature):
-            log.warning("Invalid Twilio signature — rejected request")
+            log.warning("Invalid Twilio signature — rejected request (url=%s)", url)
             return "Forbidden", 403
 
     resp   = MessagingResponse()

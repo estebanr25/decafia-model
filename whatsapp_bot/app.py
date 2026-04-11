@@ -27,7 +27,7 @@ from typing import Optional
 
 import numpy as np
 import requests
-from flask import Flask, request
+from flask import Flask, jsonify, request
 from PIL import Image
 from twilio.request_validator import RequestValidator
 from twilio.twiml.messaging_response import MessagingResponse
@@ -455,6 +455,16 @@ def webhook():
 @app.route("/health", methods=["GET"])
 def health():
     return {"status": "ok", "model_loaded": _session is not None}, 200
+
+
+@app.route("/", methods=["GET"])
+def index():
+    return jsonify({"status": "ok", "service": "DECAFIA Bot"})
+
+
+@app.route("/", methods=["POST"])
+def index_webhook():
+    return webhook()
 
 
 # ── Entry point ───────────────────────────────────────────────────────────────

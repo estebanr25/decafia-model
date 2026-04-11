@@ -37,7 +37,7 @@ from twilio.twiml.messaging_response import MessagingResponse
 # ── Paths ─────────────────────────────────────────────────────────────────────
 BASE_DIR        = Path(__file__).parent
 MODELS_PATH     = BASE_DIR / "models"
-MODEL_PATH      = MODELS_PATH / "decafia_int8.onnx"
+MODEL_PATH      = MODELS_PATH / "decafia_best.onnx"
 TREATMENTS_PATH = BASE_DIR / "treatments.json"
 
 # ── Config ────────────────────────────────────────────────────────────────────

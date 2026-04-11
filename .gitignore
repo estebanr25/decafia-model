@@ -1,0 +1,16 @@
+# Modelos pesados - nunca subir
+*.onnx
+*.pt
+*.pth
+
+# Dataset (imágenes sueltas en raíz o dataset/)
+dataset/images/
+*.zip
+
+# Python basura
+__pycache__/
+.env
+venv/
+
+# YOLO carpetas de entrenamiento
+runs/

@@ -26,6 +26,7 @@ from pathlib import Path
 from typing import Optional
 
 import numpy as np
+import onnxruntime as ort
 import requests
 from flask import Flask, jsonify, request
 from werkzeug.middleware.proxy_fix import ProxyFix
@@ -57,18 +58,18 @@ logging.getLogger().setLevel(_log_level)
 log = logging.getLogger(__name__)
 log.setLevel(_log_level)
 
-# ── Load model once at startup ────────────────────────────────────────────────
+# ── Load model once at startup (module level so gunicorn --preload captures it) ─
 try:
-    import onnxruntime as ort
-    _session = ort.InferenceSession(
+    _session    = ort.InferenceSession(
         str(MODEL_PATH),
         providers=["CPUExecutionProvider"],
     )
-    _input_name  = _session.get_inputs()[0].name
+    _input_name = _session.get_inputs()[0].name
     log.info("ONNX model loaded: %s", MODEL_PATH)
 except Exception as e:
     log.error("Failed to load ONNX model: %s", e)
-    _session = None
+    _session    = None
+    _input_name = None
 
 # ── Load treatments ───────────────────────────────────────────────────────────
 with TREATMENTS_PATH.open("r", encoding="utf-8") as f:

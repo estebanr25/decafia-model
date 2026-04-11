@@ -89,6 +89,7 @@ LOW_CONFIDENCE_MESSAGE = (
 
 # ── Flask app ─────────────────────────────────────────────────────────────────
 app = Flask(__name__)
+print(f"FROM number: {os.environ.get('TWILIO_WHATSAPP_NUMBER', 'NOT SET')}")
 
 
 # ── Inference helpers ─────────────────────────────────────────────────────────

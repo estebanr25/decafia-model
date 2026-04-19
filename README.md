@@ -6,14 +6,6 @@
 
 
 
-\[!\[Paper](https://img.shields.io/badge/Paper-Sensors%20MDPI-blue)](https://mdpi.com/journal/sensors)
-
-\[!\[Model](https://img.shields.io/badge/Model-Hugging%20Face-yellow)](https://huggingface.co/estebanr25/decafia)
-
-\[!\[License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-
-
-
 \## Enfermedades detectadas
 
 

@@ -86,9 +86,9 @@
 
 El modelo exportado (`.onnx`) está disponible en Hugging Face:
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19931903.svg)](https://doi.org/10.5281/zenodo.19931903)
 
 
-👉 \[huggingface.co/estebanr25/decafia](https://huggingface.co/estebanr25/decafia)
 
 
 

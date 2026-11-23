@@ -7,8 +7,8 @@ services:
     startCommand: gunicorn --preload --workers 1 --threads 4 --timeout 120 app:app
     envVars:
       - key: TWILIO_ACCOUNT_SID
-        value: $TWILIO_ACCOUNT_SID
+        sync: false
       - key: TWILIO_AUTH_TOKEN
-        value: $TWILIO_AUTH_TOKEN
+        sync: false
       - key: TWILIO_WHATSAPP_NUMBER
-        value: $TWILIO_PHONE_NUMBER
+        sync: false
